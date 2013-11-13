@@ -1,9 +1,5 @@
 <?php
 
-// Some proxy servers leak or forward client IP addresses in the
-// the headers they send. Check for these headers and return
-// their real IP address.
-
 function getRealAddr() {
 	if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 		$ip=$_SERVER['HTTP_CLIENT_IP'];
@@ -14,5 +10,25 @@ function getRealAddr() {
 	}
 	return $ip;
 }
+
+function twitter_acc($user) {
+	$a = simplexml_load_string(file_get_contents("http://twitter.com/users/show.xml?screen_name=$user"));
+	if($a===FALSE) {
+		return;
+	} else {
+		return array($a->followers_count, $a->statuses_count);
+	}
+}
+
+function fb_likes($user) {
+        $xml = json_decode(file_get_contents("http://graph.facebook.com/$user"));
+        return array($xml->likes, $xml->talking_about_count);
+}
+
+function fb_shares($user) {
+        $xml = json_decode(file_get_contents("http://graph.facebook.com/$user"));
+        return $xml->shares;
+}
+
 
 ?>
