@@ -2,7 +2,7 @@ function getPage($url, $referer, $header, $timeout) {
     $ch = curl_init();
     
     $ips = array("127.0.0.1", "127.0.0.2", "127.0.0.3");
-    $rand = rand(0,count($ips)-1);
+    $rand = rand(1,count($ips)-1);
     $ip = $ips[$rand];
     
     $useragent = array();
@@ -11,7 +11,7 @@ function getPage($url, $referer, $header, $timeout) {
     $useragent[] = 'Mozilla/4.0 (compatible; MSIE 6.1; Windows XP; .NET CLR 1.1.4322; .NET CLR 2.0.50727)';
     $useragent[] = 'Mozilla/5.0 (X11; U; Linux i686 (x86_64); en-US; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14';
     $useragent[] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:27.0) Gecko/20100101 Firefox/27.0';
-    $rand = rand(0, count($useragent)-1);
+    $rand = rand(1, count($useragent)-1);
     $ua = $useragent[$rand];
     
     curl_setopt($ch, CURLOPT_URL, $url);
